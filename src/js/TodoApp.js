@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FlipMove from 'react-flip-move';
 import ReactTooltip from 'react-tooltip'
+import cookie from 'react-cookie'
 import TodoList from './component/TodoList';
 import '../css/todo.css';
 
@@ -88,6 +89,30 @@ class TodoApp extends Component {
         onCloseTodo={ this.handelCloseTodo }
       />
     );
+  }
+
+  saveCookie = (d) => {
+    const date = new Date();
+    const days = d || 365;
+
+    date.setTime(+ date + (days * 86400000));
+
+    cookie.save('lists', this.state.lists, { 
+      path: '/',
+      expires: date,
+    });
+  }
+
+  componentWillMount() {
+    if (cookie.load('lists')) this.state = { lists: cookie.load('lists') };
+  }
+
+  componentDidMount() {
+    this.saveCookie(24);
+  }
+
+  componentDidUpdate() {
+    this.saveCookie(24);
   }
 
   render() {
