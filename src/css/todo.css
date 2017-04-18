@@ -202,7 +202,7 @@ input[type="checkbox"] {
 	flex-direction: column;
 	position: fixed;
 	bottom: 45%;
-	left: 12px;
+	left: 6px;
 	z-index: 1;
 }
 
@@ -211,18 +211,18 @@ input[type="checkbox"] {
 	flex-direction: column;
 	position: fixed;
 	bottom: 45%;
-	right: 12px;
+	right: 6px;
 	z-index: 1;
 }
 
 .clouds-flat-button {
   position: relative;
   vertical-align: top;
-  width: 75px;
+  width: 70px;
   height: 60px;
   padding: 0;
 	margin: 5px;
-  font-size: 28px;
+  font-size: 24px;
 	font-weight: 400;
   color:rgba(0, 0, 0, 0.8);
   text-align: center;
@@ -243,9 +243,6 @@ input[type="checkbox"] {
 .clouds-flat-button:focus {
   outline: none;
 }
-.extraClass {
-	font-size: 12px !important;
-}
 
 .todo-lists-ul {
 	display: flex;
@@ -265,7 +262,7 @@ input[type="checkbox"] {
 
 .todoapp {
 	background: #fff;
-	margin: 70px 32px;
+	margin: 70px 15px;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -406,7 +403,7 @@ label[for='close-todo'] {
 
 .todo-list {
 	height: 300px;
-	width: 362.31px;
+	width: 400px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -430,7 +427,7 @@ label[for='close-todo'] {
 
 .todo-list li.editing .edit {
 	display: block;
-	width: 506px;
+	width: 355px;
 	padding: 13px 17px 12px 17px;
 	margin: 0 0 0 43px;
 }
