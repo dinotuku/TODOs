@@ -131,7 +131,8 @@ class TodoList extends Component {
   }
   
   render() {
-    const count = this.props.todos.filter((t) => !t.done).length;
+    const unDoneCount = this.props.todos.filter((t) => !t.done).length;
+    const doneCount = this.props.todos.filter((t) => t.done).length;
     const inputText = this.props.inputText;
     const todos = this.props.todos;
     return (
@@ -149,8 +150,8 @@ class TodoList extends Component {
 
         <section className="main">
           <ToggleAll 
-            itemCount={ count }
-            onCheckClick={ () => this.handleToggleAllCheck(count) }
+            itemCount={ unDoneCount }
+            onCheckClick={ () => this.handleToggleAllCheck(unDoneCount) }
           />
           <CloseTodo 
             onButtonClick={ this.handleCloseButton }
@@ -162,9 +163,10 @@ class TodoList extends Component {
 
         <footer className="footer">
           <CountDisplay 
-            itemCount={ count }
+            itemCount={ unDoneCount }
           />
           <ClearCompleted 
+            itemCount={ doneCount }
             onButtonClick={ () => this.handleClearCompleted() }
           />
         </footer>
