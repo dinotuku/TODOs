@@ -145,15 +145,15 @@ class TodoApp extends Component {
 
     date.setTime(+ date + (days * 86400000));
 
-    cookie.save('lists', this.state.lists, { 
+    cookie.save('state', this.state, { 
       path: '/',
       expires: date,
     });
   }
 
   componentWillMount() {
-    const cookiesLists = cookie.load('lists');
-    if (cookiesLists && cookiesLists[0].nowShowing) this.state = { lists: cookiesLists };
+    const cookiesState = cookie.load('state');
+    if (cookiesState) this.state = cookiesState;
   }
 
   componentDidMount() {
