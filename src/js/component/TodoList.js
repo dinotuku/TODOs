@@ -6,29 +6,30 @@ import ToggleAll from './ToggleAll';
 import CloseTodo from './CloseTodo';
 import TodoItem from './TodoItem';
 import CountDisplay from './CountDisplay';
+import LocalFilter from './LocalFilter';
 import ClearCompleted from './ClearCompleted';
 
 class TodoList extends Component {
   handleTitle = (text) => {
-    this.props.onPropsChange(text, this.props.todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(text, this.props.todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleTitleSubmit = (ev) => {
     if (ev.which === 13 || ev.keyCode === 13) {
-      this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, true, this.props.listIdx);
+      this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, true, this.props.nowShowing, this.props.listIdx);
     }
   }
 
   handleTitleUnFocus = () => {
-    this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, true, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, true, this.props.nowShowing, this.props.listIdx);
   }
 
   handleTitleState = () => {
-    this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, false, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, false, this.props.nowShowing, this.props.listIdx);
   }
 
   handleInput = (text) => {
-    this.props.onPropsChange(this.props.title, this.props.todos, text, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, this.props.todos, text, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleSubmit = (ev) => {
@@ -39,7 +40,7 @@ class TodoList extends Component {
         value: inputText,
         done: false,
       });
-      this.props.onPropsChange(this.props.title, todos, '', this.props.titleDone, this.props.listIdx);
+      this.props.onPropsChange(this.props.title, todos, '', this.props.titleDone, this.props.nowShowing, this.props.listIdx);
     }
   }
 
@@ -50,38 +51,38 @@ class TodoList extends Component {
       value: checkedItem.value,
       done: !checkedItem.done,
     });
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleButton = (idx) => {
     let todos = this.props.todos;
     todos.splice(idx, 1);
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleItemEdit = (idx) => {
     let todos = this.props.todos;
     todos[idx].editing = true;
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleItemSave = (idx) => {
     let todos = this.props.todos;
     todos[idx].editing = false;
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleItemChange = (value, idx) => {
     let todos = this.props.todos;
     todos[idx].value = value;
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleItemKeySave = (ev, idx) => {
     if (ev.which === 13 || ev.keyCode === 13) {
       let todos = this.props.todos;
       todos[idx].editing = false;
-      this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+      this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
       ev.preventDefault();
     }
   }
@@ -93,17 +94,21 @@ class TodoList extends Component {
       element.done = done;
       array[index] = element;
     });
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   handleCloseButton = () => {
     this.props.onCloseTodo(this.props.listIdx);
   }
 
+  handleFilterClick = (type) => {
+    this.props.onFilterChange(type);
+  }
+
   handleClearCompleted = () => {
     let todos = this.props.todos;
     todos = todos.filter((t) => !t.done);
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
   }
 
   renderTodoTitle = (done) => {
@@ -166,7 +171,10 @@ class TodoList extends Component {
     const unDoneCount = this.props.todos.filter((t) => !t.done).length;
     const doneCount = this.props.todos.filter((t) => t.done).length;
     const inputText = this.props.inputText;
-    const todos = this.props.todos;
+    const nowShowing = this.props.nowShowing;
+    let todos = this.props.todos;
+    if (nowShowing === 'active') todos = todos.filter((t) => !t.done);
+    else if (nowShowing === 'completed') todos = todos.filter((t) => t.done);
     return (
       <li className="todoapp">
         
@@ -196,6 +204,10 @@ class TodoList extends Component {
         <footer className="footer">
           <CountDisplay 
             itemCount={ unDoneCount }
+          />
+          <LocalFilter
+            nowShowing={ nowShowing }
+            onFilterClick={ (type) => this.handleFilterClick(type) }
           />
           <ClearCompleted 
             itemCount={ doneCount }
