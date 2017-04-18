@@ -9,7 +9,7 @@ class ClearCompleted extends Component {
         <button 
           className="clear-completed"
           onClick={ this.props.onButtonClick }
-        >Clear completed</button>
+        >Clear</button>
       );
     }
 
