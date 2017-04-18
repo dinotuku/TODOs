@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FlipMove from 'react-flip-move';
 import cookie from 'react-cookie'
+import classNames from 'classnames';
 import TodoList from './component/TodoList';
 import FloatButton from './component/FloatButton';
 import '../css/todo.css';
@@ -32,7 +33,8 @@ class TodoApp extends Component {
           titleDone: true,
           nowShowing: 'all',
         },
-      ]
+      ],
+      nowShowing: 'all',
     };
   }
 
@@ -92,15 +94,10 @@ class TodoApp extends Component {
     lists.forEach((list, index) => {
       list.nowShowing = 'all';
     })
-    this.setState({ lists });
-  }
-
-  handleActiveClick = () => {
-    let lists= this.state.lists;
-    lists.forEach((list, index) => {
-      list.nowShowing = 'active';
-    })
-    this.setState({ lists });
+    this.setState({ 
+      lists,
+      nowShowing: 'all',
+    });
   }
 
   handleCompletedClick = () => {
@@ -108,7 +105,21 @@ class TodoApp extends Component {
     lists.forEach((list, index) => {
       list.nowShowing = 'completed';
     })
-    this.setState({ lists });
+    this.setState({ 
+      lists,
+      nowShowing: 'completed',
+    });
+  }
+
+  handleActiveClick = () => {
+    let lists= this.state.lists;
+    lists.forEach((list, index) => {
+      list.nowShowing = 'active';
+    })
+    this.setState({ 
+      lists,
+      nowShowing: 'active',
+    });
   }
 
   renderTodoList = (list, idx) => {
@@ -169,29 +180,35 @@ class TodoApp extends Component {
         <h1>TODOS</h1>
         <div className="buttons-left">
           <FloatButton
-            className="clouds-flat-button"
-            value={ `${ doneCount + notDoneCount }` }
+            className={ classNames( 'clouds-flat-button', 'all-button', {
+              selected: this.state.nowShowing === 'all',
+            }) }
+            value={ `⌘ ${ doneCount + notDoneCount }` }
             onButtonCLick={ this.handleAllClick }
           />
           <FloatButton
-            className="clouds-flat-button done-button"
+            className={ classNames( 'clouds-flat-button', 'done-button', {
+              selected: this.state.nowShowing === 'completed',
+            }) }
             value={ `✔︎ ${ doneCount }` }
             onButtonCLick={ this.handleCompletedClick }
           />
           <FloatButton
-            className="clouds-flat-button not-done-button"
+            className={ classNames( 'clouds-flat-button', 'not-done-button', {
+              selected: this.state.nowShowing === 'active',
+            }) }
             value={ `✖︎ ${ notDoneCount }` }
             onButtonCLick={ this.handleActiveClick }
           />
         </div>
         <div className="buttons-right">
           <FloatButton
-            className="clouds-flat-button"
+            className="clouds-flat-button add-list"
             value="+"
             onButtonCLick={ this.handleAddClick }
           />
           <FloatButton
-            className="clouds-flat-button"
+            className="clouds-flat-button clear-all"
             value="⊘"
             onButtonCLick={ this.handleClearAllClick }
           />

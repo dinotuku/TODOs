@@ -229,25 +229,64 @@ input[type="checkbox"] {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   background: #ecf0f1;
   border: 0;
-  border-bottom: 2px solid #dadedf;
+  border-bottom: 4px solid #dadedf;
   cursor: pointer;
   -webkit-box-shadow: inset 0 -2px #dadedf;
   box-shadow: inset 0 -2px #dadedf;
 }
+
 .clouds-flat-button:active {
   top: 2px;
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
 .clouds-flat-button:focus {
   outline: none;
 }
+
+.buttons-right .clouds-flat-button {
+  font-size: 30px;
+}
+
+.buttons-right .clouds-flat-button:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.8);
+	-webkit-box-shadow: inset 0 -2px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.8);
+}
+
+.all-button {
+	color: darkturquoise;
+}
+
+.all-button:hover,
+.all-button.selected {
+	border-bottom-color: darkturquoise;
+	-webkit-box-shadow: inset 0 -2px darkturquoise;
+  box-shadow: inset 0 -2px darkturquoise;
+}
+
 .done-button {
 	color: limegreen;
 }
+
+.done-button:hover,
+.done-button.selected {
+	border-bottom-color: limegreen;
+	-webkit-box-shadow: inset 0 -2px limegreen;
+  box-shadow: inset 0 -2px limegreen;
+}
+
 .not-done-button {
 	color: lightcoral;
+}
+
+.not-done-button:hover,
+.not-done-button.selected {
+	border-bottom-color: lightcoral;
+	-webkit-box-shadow: inset 0 -2px lightcoral;
+  box-shadow: inset 0 -2px lightcoral;
 }
 
 .todo-lists-ul {
@@ -405,6 +444,10 @@ label[for='close-todo'] {
 	cursor: pointer;
 	border: none; /* Mobile Safari */
 	outline: none;
+}
+
+.close-todo:hover {
+	color: crimson;
 }
 
 .todo-list {
