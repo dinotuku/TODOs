@@ -176,12 +176,12 @@ class TodoApp extends Component {
           <FloatButton
             className="clouds-flat-button done-button"
             value={ `✔︎ ${ doneCount }` }
-            onButtonCLick={ this.handleActiveClick }
+            onButtonCLick={ this.handleCompletedClick }
           />
           <FloatButton
             className="clouds-flat-button not-done-button"
             value={ `✖︎ ${ notDoneCount }` }
-            onButtonCLick={ this.handleCompletedClick }
+            onButtonCLick={ this.handleActiveClick }
           />
         </div>
         <div className="buttons-right">
