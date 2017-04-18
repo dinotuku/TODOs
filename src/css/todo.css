@@ -433,7 +433,7 @@ label[for='close-todo'] {
 
 .todo-list li.editing .edit {
 	display: block;
-	width: 355px;
+	width: 345px;
 	padding: 13px 17px 12px 17px;
 	margin: 0 0 0 43px;
 	z-index: 1;
