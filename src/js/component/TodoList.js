@@ -59,6 +59,33 @@ class TodoList extends Component {
     this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
   }
 
+  handleItemEdit = (idx) => {
+    let todos = this.props.todos;
+    todos[idx].editing = true;
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+  }
+
+  handleItemSave = (idx) => {
+    let todos = this.props.todos;
+    todos[idx].editing = false;
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+  }
+
+  handleItemChange = (value, idx) => {
+    let todos = this.props.todos;
+    todos[idx].value = value;
+    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+  }
+
+  handleItemKeySave = (ev, idx) => {
+    if (ev.which === 13 || ev.keyCode === 13) {
+      let todos = this.props.todos;
+      todos[idx].editing = false;
+      this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.listIdx);
+      ev.preventDefault();
+    }
+  }
+
   handleToggleAllCheck = (count) => {
     let todos = this.props.todos;
     const done = count ? true : false;
@@ -107,11 +134,16 @@ class TodoList extends Component {
   renderTodoItem = (input, idx) => {
     return (
       <TodoItem
+        key={ idx }
         content={ input.value }
         done={ input.done }
-        key={ idx }
+        editing={ input.editing }
         onCheckClick={ () => this.handleCheck(idx) }
         onButtonClick={ () => this.handleButton(idx) }
+        onEdit={ () => this.handleItemEdit(idx) }
+        onSave={ () => this.handleItemSave(idx) }
+        onChange={ (value) => this.handleItemChange(value, idx) }
+        onKeySave={ (ev) => this.handleItemKeySave(ev, idx) }
       />
     );
   }
