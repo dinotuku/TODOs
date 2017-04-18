@@ -13,9 +13,9 @@ class TodoApp extends Component {
         { 
           title: 'Welcome',
           todos: [
-            { value: '☝︎ Add new item', done: false },
-            { value: '☜ Click to complete', done: false },
-            { value: 'Delete by clicking ☞', done: false },
+            { value: '☝︎ Add new item', done: false, editing: false },
+            { value: '☜ Click to complete', done: false, editing: false },
+            { value: 'Delete by clicking ☞', done: false, editing: false },
           ],
           inputText: '',
           titleDone: true,
@@ -23,8 +23,8 @@ class TodoApp extends Component {
         { 
           title: 'School',
           todos: [
-            { value: 'Midterm', done: false },
-            { value: 'Web Programming HW1', done: true },
+            { value: 'Midterm', done: false, editing: false },
+            { value: 'Web Programming HW1', done: true, editing: false },
           ],
           inputText: '',
           titleDone: true,
@@ -140,30 +140,12 @@ class TodoApp extends Component {
             type="button"
             value={ `✔︎ ${ doneCount }` }
             style={ doneStyle }
-            data-tip={ `${ doneCount } Items<br>Done` }
-            data-for="done"
-          />
-          <ReactTooltip 
-            id="done"
-            place="top"
-            type="dark"
-            effect="solid"
-            multiline={ true }
           />
           <input 
             className="clouds-flat-button"
             type="button"
             value={ `✖︎ ${ notDoneCount }` }
             style={ notDoneStyle }
-            data-tip={ `${ notDoneCount } Items<br>Not Done` }
-            data-for="not-done"
-          />
-          <ReactTooltip 
-            id="not-done"
-            place="bottom"
-            type="dark"
-            effect="solid"
-            multiline={ true }
           />
         </div>
         <div className="buttons-right">
@@ -177,7 +159,8 @@ class TodoApp extends Component {
           />
           <ReactTooltip 
             id="add"
-            place="top"
+            class="extra-class"
+            place="left"
             type="dark"
             effect="solid"
           />
@@ -192,8 +175,8 @@ class TodoApp extends Component {
           />
           <ReactTooltip
             id="clear"
-            class='extraClass'
-            place="bottom"
+            class="extra-class"
+            place="left"
             type="dark"
             effect="solid"
             multiline={ true }
