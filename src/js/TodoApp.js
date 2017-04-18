@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import FlipMove from 'react-flip-move';
-import ReactTooltip from 'react-tooltip'
 import cookie from 'react-cookie'
 import TodoList from './component/TodoList';
+import FloatButton from './component/FloatButton';
 import '../css/todo.css';
 
 class TodoApp extends Component {
@@ -14,11 +14,12 @@ class TodoApp extends Component {
           title: 'Welcome',
           todos: [
             { value: '☝︎ Add new item', done: false, editing: false },
-            { value: '☜ Click to complete', done: false, editing: false },
+            { value: '☜ Click to complete', done: true, editing: false },
             { value: 'Delete by clicking ☞', done: false, editing: false },
           ],
           inputText: '',
           titleDone: true,
+          nowShowing: 'all',
         },
         { 
           title: 'School',
@@ -28,6 +29,7 @@ class TodoApp extends Component {
           ],
           inputText: '',
           titleDone: true,
+          nowShowing: 'all',
         },
       ]
     };
@@ -41,6 +43,7 @@ class TodoApp extends Component {
       todos: [],
       inputText: '',
       titleDone: false,
+      nowShowing: 'all',
     });
 
     this.setState({ lists });
@@ -59,13 +62,14 @@ class TodoApp extends Component {
     this.setState({ lists });
   }
 
-  handlePropsChange = (title, todos, inputText, titleDone, idx) => {
+  handlePropsChange = (title, todos, inputText, titleDone, nowShowing, idx) => {
     const lists = this.state.lists;
     lists[idx] = { 
       title,
       todos,
       inputText,
       titleDone,
+      nowShowing
     };
     this.setState({ lists });
   }
@@ -76,6 +80,36 @@ class TodoApp extends Component {
     this.setState({ lists });
   }
 
+  handleFilterChange = (type, idx) => {
+    let lists= this.state.lists;
+    lists[idx].nowShowing = type;
+    this.setState({ lists });
+  }
+
+  handleAllClick = () => {
+    let lists= this.state.lists;
+    lists.forEach((list, index) => {
+      list.nowShowing = 'all';
+    })
+    this.setState({ lists });
+  }
+
+  handleActiveClick = () => {
+    let lists= this.state.lists;
+    lists.forEach((list, index) => {
+      list.nowShowing = 'active';
+    })
+    this.setState({ lists });
+  }
+
+  handleCompletedClick = () => {
+    let lists= this.state.lists;
+    lists.forEach((list, index) => {
+      list.nowShowing = 'completed';
+    })
+    this.setState({ lists });
+  }
+
   renderTodoList = (list, idx) => {
     return (
       <TodoList
@@ -83,10 +117,12 @@ class TodoApp extends Component {
         todos={ list.todos }
         inputText={ list.inputText }
         titleDone={ list.titleDone }
+        nowShowing={ list.nowShowing }
         key={ idx }
         listIdx={ idx }
         onPropsChange={ this.handlePropsChange }
         onCloseTodo={ this.handelCloseTodo }
+        onFilterChange={ (type) => this.handleFilterChange(type, idx) }
       />
     );
   }
@@ -124,62 +160,38 @@ class TodoApp extends Component {
     this.state.lists.forEach((list) => {
       notDoneCount += list.todos.filter((t) => !t.done).length;
     });
-    const doneStyle = {
-      color: 'limegreen',
-    };
-    const notDoneStyle = {
-      color: 'lightcoral',
-    };
+
     return (
       <div className="todos">
 
         <h1>TODOS</h1>
         <div className="buttons-left">
-          <input 
+          <FloatButton
             className="clouds-flat-button"
-            type="button"
-            value={ `✔︎ ${ doneCount }` }
-            style={ doneStyle }
+            value={ `${ doneCount + notDoneCount }` }
+            onButtonCLick={ this.handleAllClick }
           />
-          <input 
-            className="clouds-flat-button"
-            type="button"
+          <FloatButton
+            className="clouds-flat-button done-button"
+            value={ `✔︎ ${ doneCount }` }
+            onButtonCLick={ this.handleActiveClick }
+          />
+          <FloatButton
+            className="clouds-flat-button not-done-button"
             value={ `✖︎ ${ notDoneCount }` }
-            style={ notDoneStyle }
+            onButtonCLick={ this.handleCompletedClick }
           />
         </div>
         <div className="buttons-right">
-          <input 
+          <FloatButton
             className="clouds-flat-button"
-            type="button"
             value="+"
-            onClick={ this.handleAddClick }
-            data-tip="New List"
-            data-for="add"
+            onButtonCLick={ this.handleAddClick }
           />
-          <ReactTooltip 
-            id="add"
-            class="extra-class"
-            place="left"
-            type="dark"
-            effect="solid"
-          />
-
-          <input 
-            className="clouds-flat-button" 
-            type="button" 
+          <FloatButton
+            className="clouds-flat-button"
             value="⊘"
-            onClick={ this.handleClearAllClick }
-            data-tip="Clear All<br>Completed"
-            data-for="clear"
-          />
-          <ReactTooltip
-            id="clear"
-            class="extra-class"
-            place="left"
-            type="dark"
-            effect="solid"
-            multiline={ true }
+            onButtonCLick={ this.handleClearAllClick }
           />
         </div>
 
