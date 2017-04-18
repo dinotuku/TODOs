@@ -14,6 +14,7 @@ class InputBar extends Component {
       <input
         className={ this.props.className }
         value={ this.props.inputText }
+        placeholder="Something to be done?"
         onChange={ this.handleInputBarChange }
         onKeyDown={ this.handleInputBarSubmit }
       />
