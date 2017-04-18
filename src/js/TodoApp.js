@@ -14,7 +14,8 @@ class TodoApp extends Component {
           title: 'Welcome',
           todos: [
             { value: '☝︎ Add new item', done: false, editing: false },
-            { value: '☜ Click to complete', done: true, editing: false },
+            { value: '☜ Mark completed', done: true, editing: false },
+            { value: 'Double click to edit', done: false, editing: true },
             { value: 'Delete by clicking ☞', done: false, editing: false },
           ],
           inputText: '',
@@ -140,7 +141,8 @@ class TodoApp extends Component {
   }
 
   componentWillMount() {
-    if (cookie.load('lists')) this.state = { lists: cookie.load('lists') };
+    const cookiesLists = cookie.load('lists');
+    if (cookiesLists && cookiesLists[0].nowShowing) this.state = { lists: cookiesLists };
   }
 
   componentDidMount() {
