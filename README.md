@@ -15,7 +15,9 @@ A working live demo [http://dtk0528.github.io/TODOs](http://dtk0528.github.io/TO
 * Remove a todo list
 * Add and delete todo items
 * Mark completed items
+* Double click to edit items
 * Show how many completed and uncompleted items
+* Filter active or completed items
 * Save lists to cookies
 * Clean design
 
