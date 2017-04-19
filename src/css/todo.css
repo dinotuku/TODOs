@@ -203,16 +203,14 @@ input[type="checkbox"] {
 	position: fixed;
 	top: 35%;
 	left: 14px;
-	z-index: 1;
 }
 
 .buttons-right {
 	display: flex;
 	flex-direction: column;
 	position: fixed;
-	bottom: 45%;
+	top: 35%;
 	right: 14px;
-	z-index: 1;
 }
 
 .clouds-flat-button {
@@ -221,7 +219,7 @@ input[type="checkbox"] {
   width: 70px;
   height: 60px;
   padding: 0;
-	margin: 5px;
+	margin: 10px 5px 5px 5px;
   font-size: 24px;
 	font-weight: 400;
   color:rgba(0, 0, 0, 0.8);
@@ -729,27 +727,23 @@ html .clear-completed:active {
 	}
 
 	.buttons-left {
-		transform: translate3d(0,0,0);
-		position: fixed;
-		top: 35%;
+		top: 40%;
 		left: 5px;
 	}
 
 	.buttons-right {
-		transform: translate3d(0,0,0);
-		position: fixed;
 		top: 40%;
 		right: 5px;
 	}
 
 	.buttons-left .clouds-flat-button {
-		height: 40px;
+		height: 30px;
 		width: 30px;
 		font-size: 8px;
 	}
 
 	.buttons-right .clouds-flat-button {
-		height: 40px;
+		height: 30px;
 		width: 30px;
 		font-size: 10px;
 	}

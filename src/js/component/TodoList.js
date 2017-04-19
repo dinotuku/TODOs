@@ -11,25 +11,25 @@ import ClearCompleted from './ClearCompleted';
 
 class TodoList extends Component {
   handleTitle = (text) => {
-    this.props.onPropsChange(text, this.props.todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTitleChange(text);
   }
 
   handleTitleSubmit = (ev) => {
     if (ev.which === 13 || ev.keyCode === 13) {
-      this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, true, this.props.nowShowing, this.props.listIdx);
+      this.props.onTitleSubmit(true);
     }
   }
 
   handleTitleUnFocus = () => {
-    this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, true, this.props.nowShowing, this.props.listIdx);
+    this.props.onTitleSubmit(true);
   }
 
   handleTitleState = () => {
-    this.props.onPropsChange(this.props.title, this.props.todos, this.props.inputText, false, this.props.nowShowing, this.props.listIdx);
+    this.props.onTitleSubmit(false);
   }
 
   handleInput = (text) => {
-    this.props.onPropsChange(this.props.title, this.props.todos, text, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onInputChange(text);
   }
 
   handleSubmit = (ev) => {
@@ -40,7 +40,8 @@ class TodoList extends Component {
         value: inputText,
         done: false,
       });
-      this.props.onPropsChange(this.props.title, todos, '', this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+      this.props.onTodosChange(todos);
+      this.props.onInputChange('');
     }
   }
 
@@ -51,38 +52,38 @@ class TodoList extends Component {
       value: checkedItem.value,
       done: !checkedItem.done,
     });
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTodosChange(todos);
   }
 
   handleButton = (idx) => {
     let todos = this.props.todos;
     todos.splice(idx, 1);
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTodosChange(todos);
   }
 
   handleItemEdit = (idx) => {
     let todos = this.props.todos;
     todos[idx].editing = true;
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTodosChange(todos);
   }
 
   handleItemSave = (idx) => {
     let todos = this.props.todos;
     todos[idx].editing = false;
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTodosChange(todos);
   }
 
   handleItemChange = (value, idx) => {
     let todos = this.props.todos;
     todos[idx].value = value;
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTodosChange(todos);
   }
 
   handleItemKeySave = (ev, idx) => {
     if (ev.which === 13 || ev.keyCode === 13) {
       let todos = this.props.todos;
       todos[idx].editing = false;
-      this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+      this.props.onTodosChange(todos);
       ev.preventDefault();
     }
   }
@@ -94,7 +95,7 @@ class TodoList extends Component {
       element.done = done;
       array[index] = element;
     });
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTodosChange(todos);
   }
 
   handleCloseButton = () => {
@@ -108,7 +109,7 @@ class TodoList extends Component {
   handleClearCompleted = () => {
     let todos = this.props.todos;
     todos = todos.filter((t) => !t.done);
-    this.props.onPropsChange(this.props.title, todos, this.props.inputText, this.props.titleDone, this.props.nowShowing, this.props.listIdx);
+    this.props.onTodosChange(todos);
   }
 
   renderTodoTitle = (done) => {
@@ -139,7 +140,7 @@ class TodoList extends Component {
   renderTodoItem = (input, idx) => {
     return (
       <TodoItem
-        key={ idx }
+        key={ `todo-item-${idx}` }
         content={ input.value }
         done={ input.done }
         editing={ input.editing }

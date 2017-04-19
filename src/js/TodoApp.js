@@ -65,16 +65,28 @@ class TodoApp extends Component {
     this.setState({ lists });
   }
 
-  handlePropsChange = (title, todos, inputText, titleDone, nowShowing, idx) => {
+  handleTitleChange = (title, idx) => {
     const lists = this.state.lists;
-    lists[idx] = { 
-      title,
-      todos,
-      inputText,
-      titleDone,
-      nowShowing
-    };
-    this.setState({ lists });
+    lists[idx].title = title;
+    this.setState({ lists })
+  }
+
+  handleTitleEditState = (state, idx) => {
+    const lists = this.state.lists;
+    lists[idx].titleDone = state;
+    this.setState({ lists })
+  }
+
+  handleInputChange = (text, idx) => {
+    const lists = this.state.lists;
+    lists[idx].inputText = text;
+    this.setState({ lists })
+  }
+
+  handleTodosChange = (todos, idx) => {
+    const lists = this.state.lists;
+    lists[idx].todos = todos;
+    this.setState({ lists })
   }
 
   handelCloseTodo = (idx) => {
@@ -130,9 +142,12 @@ class TodoApp extends Component {
         inputText={ list.inputText }
         titleDone={ list.titleDone }
         nowShowing={ list.nowShowing }
-        key={ idx }
+        key={ `todo-list-${idx}` }
         listIdx={ idx }
-        onPropsChange={ this.handlePropsChange }
+        onTitleChange={ (title) => this.handleTitleChange(title, idx) }
+        onTitleSubmit={ (state) => this.handleTitleEditState(state, idx) }
+        onInputChange={ (text) => this.handleInputChange(text, idx) }
+        onTodosChange={ (todos) => this.handleTodosChange(todos, idx) }
         onCloseTodo={ this.handelCloseTodo }
         onFilterChange={ (type) => this.handleFilterChange(type, idx) }
       />
