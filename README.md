@@ -1,12 +1,12 @@
 TODOs
 =========
-[![Demo](https://camo.githubusercontent.com/d57a88a378dd7ed232931397d903da874daa7809/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f64656d6f2d6f6e6c696e652d677265656e2e737667)](http://dtk0528.github.io/TODOs)  
+[![Demo](https://camo.githubusercontent.com/d57a88a378dd7ed232931397d903da874daa7809/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f64656d6f2d6f6e6c696e652d677265656e2e737667)](http://dinotuku.github.io/TODOs)  
   
 ![UI](public/img/ui.png)
 
 ## Demo
 
-A working live demo [http://dtk0528.github.io/TODOs](http://dtk0528.github.io/TODOs)
+A working live demo [http://dinotuku.github.io/TODOs](http://dinotuku.github.io/TODOs)
 
 ## Features
 
@@ -27,7 +27,7 @@ A working live demo [http://dtk0528.github.io/TODOs](http://dtk0528.github.io/TO
 
 #### Get the source code  
 
-	git clone https://github.com/dtk0528/TODOs.git
+	git clone https://github.com/dinotuku/TODOs.git
 	cd todos
 	
 #### Download and install all the dependencies
