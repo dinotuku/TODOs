@@ -1,7 +1,7 @@
 {
   "name": "todos",
   "version": "0.1.0",
-  "homepage": "https://dtk0528.github.io/TODOs",
+  "homepage": "https://dinotuku.github.io/TODOs",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
